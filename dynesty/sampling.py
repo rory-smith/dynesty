@@ -167,7 +167,7 @@ def sample_rwalk(args):
     ncall = 0
 
     drhat, dr, du, u_prop, logl_prop = np.nan, np.nan, np.nan, np.nan, np.nan
-    while nc < walks or accept == 0:
+    while nc < walks:# or accept == 0:
         while True:
 
             # Check scale-factor.
@@ -244,6 +244,11 @@ def sample_rwalk(args):
             nc, accept, reject = 0, 0, 0  # reset values
 
     blob = {'accept': accept, 'reject': reject, 'fail': nfail, 'scale': scale}
+
+    if accept == 0:
+        u = u_prop
+        v = v_prop
+        logl = logl_prop
 
     return u, v, logl, ncall, blob
 
